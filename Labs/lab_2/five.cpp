@@ -1,9 +1,9 @@
 #include "five.h"
 
-// Конструктор по умолчанию
+// Дефолтный конструктор
 Five::Five() : digits(nullptr), size(0) {}
 
-// Конструктор с размером и значением по умолчанию
+// Конструктор по размеру и значению
 Five::Five(const size_t &n, unsigned char t) : size(n) {
     if (t > 4) throw std::invalid_argument("Invalid digit for base 5.");
     digits = new unsigned char[size];
@@ -12,7 +12,7 @@ Five::Five(const size_t &n, unsigned char t) : size(n) {
     }
 }
 
-// Конструктор со списком инициализации
+// Конструктор по списку инициализации
 Five::Five(const std::initializer_list<unsigned char> &t) : size(t.size()) {
     digits = new unsigned char[size];
     size_t i = 0;
@@ -22,7 +22,7 @@ Five::Five(const std::initializer_list<unsigned char> &t) : size(t.size()) {
     }
 }
 
-// Конструктор из строки
+// Конструктор по строке
 Five::Five(const std::string &number) : digits(nullptr), size(0) {
     fromString(number);
 }
@@ -72,20 +72,20 @@ Five &Five::operator=(Five &&other) noexcept {
     return *this;
 }
 
-// Оператор сложения
+// Сложения
 Five Five::operator+(const Five &other) const {
     int decimal_sum = toDecimal() + other.toDecimal();
     return fromDecimal(decimal_sum);
 }
 
-// Оператор вычитания
+// Вычитания
 Five Five::operator-(const Five &other) const {
     int decimal_diff = toDecimal() - other.toDecimal();
     if (decimal_diff < 0) throw std::invalid_argument("Resulting number is negative.");
     return fromDecimal(decimal_diff);
 }
 
-// Операторы сравнения
+// Сравнения
 bool Five::operator<(const Five &other) const {
     return toDecimal() < other.toDecimal();
 }
@@ -143,13 +143,19 @@ Five Five::fromDecimal(int decimal) {
     if (decimal == 0) return Five("0");
 
     std::string result;
-    while (decimal > 0) {
-        result.push_back((decimal % 5) + '0');
-        decimal /= 5;
+    int temp_decimal = decimal;
+
+    int num_digits = 0;
+    while (temp_decimal > 0) {
+        temp_decimal /= 5;
+        ++num_digits;
     }
-    
-    for (size_t i = 0, j = result.size() - 1; i < j; ++i, --j) {
-        std::swap(result[i], result[j]); 
+
+    result.resize(num_digits); 
+
+    for (int i = num_digits - 1; i >= 0; --i) {
+        result[i] = (decimal % 5) + '0';
+        decimal /= 5;
     }
 
     return Five(result);
