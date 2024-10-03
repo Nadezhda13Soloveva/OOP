@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(lab_1)
+project(lab_2)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -20,16 +20,16 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 
-add_library(lab1_lib exchanger.cpp)
-add_executable(lab1_exe main.cpp)
+add_library(lab2_lib five.cpp)
+add_executable(lab2_exe main.cpp)
 
-target_link_libraries(lab1_exe PRIVATE lab1_lib)
+target_link_libraries(lab2_exe PRIVATE lab2_lib)
 
 enable_testing()
 
-add_executable(test_1 test_1.cpp)
-target_link_libraries(test_1 lab1_lib gtest_main)
+add_executable(test_2 test_2.cpp)
+target_link_libraries(test_2 lab2_lib gtest_main)
 
 
-add_test(NAME MyProjectTests COMMAND test_1)
+add_test(NAME MyProjectTests COMMAND test_2)
 
