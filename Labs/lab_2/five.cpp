@@ -112,7 +112,7 @@ void Five::fromString(const std::string &number) {
         if (number[size - 1 - i] < '0' || number[size - 1 - i] > '4') {
             throw std::invalid_argument("Invalid character in the number.");
         }
-        digits[i] = number[size - 1 - i] - '0';
+        digits[i] = number[size - 1 - i] - 48;
     }
 }
 
@@ -120,7 +120,7 @@ void Five::fromString(const std::string &number) {
 std::string Five::toString() const {
     std::string result(size, '0');
     for (size_t i = 0; i < size; ++i) {
-        result[size - 1 - i] = digits[i] + '0';
+        result[size - 1 - i] = digits[i] + 48;
     }
     return result;
 }
@@ -154,7 +154,7 @@ Five Five::fromDecimal(int decimal) {
     result.resize(num_digits); 
 
     for (int i = num_digits - 1; i >= 0; --i) {
-        result[i] = (decimal % 5) + '0';
+        result[i] = (decimal % 5) + 48;
         decimal /= 5;
     }
 
