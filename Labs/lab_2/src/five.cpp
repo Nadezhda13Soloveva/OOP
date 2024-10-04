@@ -4,11 +4,11 @@
 Five::Five() : digits(nullptr), size(0) {}
 
 // Конструктор по размеру и значению
-Five::Five(const size_t &n, unsigned char t) : size(n) {
-    if (t > 4) throw std::invalid_argument("Invalid digit for base 5.");
+Five::Five(const size_t &n, unsigned char val) : size(n) {
+    if (val > 4) throw std::invalid_argument("Invalid digit for base 5.");
     digits = new unsigned char[size];
     for (size_t i = 0; i < size; ++i) {
-        digits[i] = t;  
+        digits[i] = val;  
     }
 }
 
