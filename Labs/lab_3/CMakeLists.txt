@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(lab_2)
+project(lab_3)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,17 +17,20 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_library(lab2_lib src/five.cpp include/five.h)
-target_include_directories(lab2_lib PUBLIC include)
+include_directories(include)
 
-add_executable(lab2_exe main.cpp include/five.h src/five.cpp)
-target_link_libraries(lab2_exe PRIVATE lab2_lib)
+set(SOURCES
+    src/figures.cpp
+    src/point.cpp
+    src/vector.tpp
+)
+
+
+add_executable(lab3_exe main.cpp ${SOURCES})
 
 enable_testing()
 
-add_executable(tests test/tests.cpp)
-target_link_libraries(tests lab2_lib gtest_main)
+add_executable(test3 test/tests.cpp ${SOURCES})
+target_link_libraries(test3 gtest_main)
 
-
-add_test(NAME lab2_test COMMAND tests)
-
+add_test(NAME lab3_test COMMAND test3)
