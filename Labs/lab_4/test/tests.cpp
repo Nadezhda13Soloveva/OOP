@@ -90,7 +90,7 @@ TEST(OctagonTest, ValidOctagon) {
         Point<double>(0.0, 1.0)
     };
     Octagon<double> octagon(vertices);
-    EXPECT_NEAR(octagon.area(), 7.0, 1e-6); // Adjust as per correct area calculation
+    EXPECT_NEAR(octagon.area(), 7.0, 1e-6);
 }
 
 TEST(OctagonTest, CollinearPointsInOctagon) {

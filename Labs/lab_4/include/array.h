@@ -25,7 +25,8 @@ public:
     void clear();
 };
 
-// Реализация методов
+
+
 template<class K>
 void Array<K>::resize() {
     capacity = capacity * 2 + 1;
