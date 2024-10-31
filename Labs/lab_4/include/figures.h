@@ -8,7 +8,7 @@
 #include <iostream>
 
 // FIGURE
-template<typename T>
+template<IsScalar T>
 class Figure {
 public:
     virtual ~Figure() = default;
@@ -19,7 +19,7 @@ public:
     virtual std::unique_ptr<Figure<T>> clone() const = 0;
 };
 
-template<typename T>
+template<IsScalar T>
 std::ostream& operator<<(std::ostream& os, const Figure<T>& fig) {
     fig.print(os);
     return os;
@@ -27,17 +27,17 @@ std::ostream& operator<<(std::ostream& os, const Figure<T>& fig) {
 
 
 
-template<typename T>
+template<IsScalar T>
 bool isCollinear(const Point<T>& a, const Point<T>& b, const Point<T>& c) {
     return (b.y - a.y) * (c.x - b.x) == (c.y - b.y) * (b.x - a.x);
 }
 
-template<typename T>
+template<IsScalar T>
 double distance(const Point<T>& a, const Point<T>& b) {
     return std::sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
 
-template<typename T>
+template<IsScalar T>
 bool isRightAngle(const Point<T>& a, const Point<T>& b, const Point<T>& c) {
     double ab2 = distance(a, b) * distance(a, b);
     double bc2 = distance(b, c) * distance(b, c);
@@ -47,7 +47,7 @@ bool isRightAngle(const Point<T>& a, const Point<T>& b, const Point<T>& c) {
 
 
 // TRIANGLE
-template<typename T>
+template<IsScalar T>
 class Triangle : public Figure<T> {
 private:
     std::unique_ptr<Point<T>> a, b, c;
@@ -98,7 +98,7 @@ public:
 
 
 // SQUARE
-template<typename T>
+template<IsScalar T>
 class Square : public Figure<T> {
 private:
     std::unique_ptr<Point<T>> a, b, c, d;
@@ -162,7 +162,7 @@ public:
 
 
 // OCTAGON
-template<typename T>
+template<IsScalar T>
 class Octagon : public Figure<T> {
 private:
     std::unique_ptr<Point<T>> vertices[8];

@@ -2,8 +2,12 @@
 #define POINT_H
 
 #include <iostream>
+#include <type_traits>
 
 template<typename T>
+concept IsScalar = std::is_arithmetic_v<T>;
+
+template<IsScalar T>
 class Point {
 public:
     T x, y;
@@ -13,14 +17,12 @@ public:
         return std::abs(x - other.x) < 1e-6 && std::abs(y - other.y) < 1e-6;
     }
 
-    template<typename U>
-    friend std::istream& operator>>(std::istream& is, Point<U>& p) {
+    friend std::istream& operator>>(std::istream& is, Point& p) {
         is >> p.x >> p.y;
         return is;
     }
 
-    template<typename U>
-    friend std::ostream& operator<<(std::ostream& os, const Point<U>& p) {
+    friend std::ostream& operator<<(std::ostream& os, const Point& p) {
         os << "(" << p.x << ", " << p.y << ")";
         return os;
     }
