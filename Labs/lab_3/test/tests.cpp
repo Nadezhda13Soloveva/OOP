@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
 #include "figures.h"
-#include "vector.h"
+#include "array.h"
 
-// из main
-void printFigures(const Vector<std::unique_ptr<Figure>>& figures) {
+// Вспомогательные из main
+void printFigures(const Array& figures) {
     for (size_t i = 0; i < figures.getSize(); ++i) {
         std::cout << *figures[i] << " Center: " << figures[i]->center() << " Area: " << figures[i]->area() << "\n";
     }
 }
 
-double totalArea(const Vector<std::unique_ptr<Figure>>& figures) {
+double totalArea(const Array& figures) {
     double sum = 0.0;
     for (size_t i = 0; i < figures.getSize(); ++i) {
         sum += figures[i]->area();
@@ -87,32 +87,32 @@ TEST(OctagonTest, ValidOctagon) {
     EXPECT_EQ(o.center().y, 0.5);
 }
 
-// Vector
-TEST(VectorTest, PushBackAndAccess) {
-    Vector<int> vec;
-    vec.push_back(1);
-    vec.push_back(2);
-    EXPECT_EQ(vec[0], 1);
-    EXPECT_EQ(vec[1], 2);
+// Array
+TEST(ArrayTest, PushBackAndAccess) {
+    Array figures;
+    figures.push_back(std::make_unique<Triangle>(Point(0, 0), Point(1, 0), Point(0, 1)));
+    figures.push_back(std::make_unique<Square>(Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 0)));
+    EXPECT_DOUBLE_EQ(figures[0]->area(), 0.5);
+    EXPECT_DOUBLE_EQ(figures[1]->area(), 1.0);
 }
 
-TEST(VectorTest, Remove) {
-    Vector<int> vec;
-    vec.push_back(1);
-    vec.push_back(2);
-    vec.remove(0);
-    EXPECT_EQ(vec[0], 2);
-    EXPECT_EQ(vec.getSize(), 1);
+TEST(ArrayTest, Remove) {
+    Array figures;
+    figures.push_back(std::make_unique<Triangle>(Point(0, 0), Point(1, 0), Point(0, 1)));
+    figures.push_back(std::make_unique<Square>(Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 0)));
+    figures.remove(0);
+    EXPECT_DOUBLE_EQ(figures[0]->area(), 1.0);
+    EXPECT_EQ(figures.getSize(), 1);
 }
 
-TEST(VectorTest, OutOfRange) {
-    Vector<int> vec;
-    EXPECT_THROW(vec[0], std::out_of_range);
+TEST(ArrayTest, OutOfRange) {
+    Array figures;
+    EXPECT_THROW(figures[0], std::out_of_range);
 }
 
 // printFigures
 TEST(FigureTest, PrintFigures) {
-    Vector<std::unique_ptr<Figure>> figures;
+    Array figures;
     figures.push_back(std::make_unique<Triangle>(Point(0, 0), Point(1, 0), Point(0, 1)));
     
     testing::internal::CaptureStdout();
@@ -123,7 +123,7 @@ TEST(FigureTest, PrintFigures) {
 
 // totalArea
 TEST(FigureTest, TotalArea) {
-    Vector<std::unique_ptr<Figure>> figures;
+    Array figures;
     figures.push_back(std::make_unique<Triangle>(Point(0, 0), Point(1, 0), Point(0, 1)));
     EXPECT_DOUBLE_EQ(totalArea(figures), 0.5);
 }

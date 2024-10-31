@@ -22,7 +22,7 @@ include_directories(include)
 set(SOURCES
     src/figures.cpp
     src/point.cpp
-    src/vector.tpp
+    src/array.cpp
 )
 
 
