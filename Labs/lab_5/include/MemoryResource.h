@@ -3,7 +3,6 @@
 
 #include <memory_resource>
 #include <vector>
-#include <cassert>
 
 class FixedBlockMemoryResource : public std::pmr::memory_resource {
 public:
