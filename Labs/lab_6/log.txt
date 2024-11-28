@@ -1,0 +1,4 @@
+s1 (Squirrel) fights b1 (Bear) -> b1 won.
+s2 (Squirrel) fights b1 (Bear) -> b1 won.
+b1 (Bear) fights Ork (Orc) -> Ork won.
+Ork (Orc) fights o (Orc) -> Both Orcs died.

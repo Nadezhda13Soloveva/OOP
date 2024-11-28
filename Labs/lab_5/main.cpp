@@ -8,9 +8,9 @@
 
 void printQueue(ContainerQueue<QueueElement>& queue) {
     for (auto it = queue.begin(); it != queue.end(); ++it) {
-        std::visit([](auto&& arg) {
-            using T = std::decay_t<decltype(arg)>;
-            if constexpr (std::is_same_v<T, int>) {
+        std::visit([](auto&& arg) { 
+            using T = std::decay_t<decltype(arg)>; 
+            if constexpr (std::is_same_v<T, int>) { 
                 std::cout << arg << " ";
             } else if constexpr (std::is_same_v<T, ComplexType>) {
                 std::cout << "{" << arg.a << ", " << arg.b << ", " << arg.c << "} ";
@@ -21,10 +21,8 @@ void printQueue(ContainerQueue<QueueElement>& queue) {
 }
 
 int main() {
-    // Создание пользовательского memory_resource
     FixedBlockMemoryResource memoryResource(sizeof(QueueElement) * 100, 100);
 
-    // Использование memory_resource с ContainerQueue для QueueElement
     std::pmr::polymorphic_allocator<QueueElement> alloc(&memoryResource);
     ContainerQueue<QueueElement> mixedQueue(&memoryResource);
 

@@ -16,8 +16,9 @@ protected:
 private:
     size_t blockSize;
     size_t blockCount;
-    std::vector<char> memory;
-    std::vector<void*> freeBlocks;
+    std::vector<char> memory; 
+    std::vector<void*> freeBlocks; 
+    
 };
 
 #endif // FIXEDBLOCKMEMORYRESOURCE_H
