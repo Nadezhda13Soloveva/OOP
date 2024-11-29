@@ -24,12 +24,8 @@ void FightVisitor::fight(std::vector<std::shared_ptr<NPC>>& npcs) {
                 std::string fightLog = npc1->getName() + " (" + npc1->getType() + ") fights " +
                                        npc2->getName() + " (" + npc2->getType() + ") -> ";
 
-                if (npc1->getType() == "Orc" && npc2->getType() == "Orc") {
-                    // Специальное условие для сражения орков
-                    fightLog += "Both Orcs died.";
-                    toRemove.push_back(npc1);
-                    toRemove.push_back(npc2);
-                } else if (npc1Wins && npc2Wins) {
+                
+                if (npc1Wins && npc2Wins) {
                     fightLog += "Both died.";
                     toRemove.push_back(npc1);
                     toRemove.push_back(npc2);
