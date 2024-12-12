@@ -43,7 +43,7 @@ target_link_libraries(lab7_pro Threads::Threads)
 
 enable_testing()
 
-add_executable(test7 test/tests.cpp ${SOURCES})
+add_executable(test7 test/basic_tests.cpp ${SOURCES})
 target_link_libraries(test7 gtest_main Threads::Threads)
 
 add_test(NAME lab7_test COMMAND test7)
